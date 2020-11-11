@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.StudentsAttendanceSystemFacialRecognition">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.front"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.front.autofocus"
+        android:required="false" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name="com.example.StudentsAttendanceSystemFacialRecognition.editAttendanceSheet"
+            android:label=""></activity>
+        <activity
+            android:name="com.example.StudentsAttendanceSystemFacialRecognition.ShowAttendanceSheet"
+            android:label="" />
+        <activity
+            android:name="com.example.StudentsAttendanceSystemFacialRecognition.AttendanceSheetSelect"
+            android:label="" />
+        <activity
+            android:name="com.example.StudentsAttendanceSystemFacialRecognition.ConfirmAttendeeStudentList"
+            android:label="" />
+        <activity
+            android:name="com.example.StudentsAttendanceSystemFacialRecognition.attendeeStudentsList"
+            android:label="" />
+        <activity android:name="com.example.StudentsAttendanceSystemFacialRecognition.confirmAttendee" />
+        <activity
+            android:name="com.example.StudentsAttendanceSystemFacialRecognition.ChooseCourseDetectdNames"
+            android:label="" />
+        <activity
+            android:name="com.example.StudentsAttendanceSystemFacialRecognition.SelectCourseTrain"
+            android:label="" />
+        <activity android:name="com.example.StudentsAttendanceSystemFacialRecognition.MainActivityStudents"
+            android:label=""/>
+        <activity
+            android:name="com.example.StudentsAttendanceSystemFacialRecognition.LoginActivity"
+            android:label="@string/space" />
+        <activity
+            android:name="com.example.StudentsAttendanceSystemFacialRecognition.Recognise"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.example.StudentsAttendanceSystemFacialRecognition.MainActivity"
+            android:label="@string/space" />
+        <activity
+            android:name="com.example.StudentsAttendanceSystemFacialRecognition.DetectedNames"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.example.StudentsAttendanceSystemFacialRecognition.Training"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.example.StudentsAttendanceSystemFacialRecognition.NameActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.example.StudentsAttendanceSystemFacialRecognition.Splash_Screen"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="com.google.firebase.ml.vision.DEPENDENCIES"
+            android:value="face" />
+    </application>
+
+</manifest>
