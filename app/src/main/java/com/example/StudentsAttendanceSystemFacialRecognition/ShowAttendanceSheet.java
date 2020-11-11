@@ -40,7 +40,6 @@ public class ShowAttendanceSheet extends AppCompatActivity {
         initialize();
         attendanceAbsentCounter();
         fillArrays();
-        removeNames();
 
 
         eAttendanceSheet.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +73,15 @@ public class ShowAttendanceSheet extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                String userEmail = user.getEmail();
+
+                int index = userEmail.indexOf('@');
+                userEmail = userEmail.substring(0, index);
+                String userRealName = dataSnapshot.child("usersInfo").child(userEmail).child("userRealName").getValue(String.class);
+                String usertype = dataSnapshot.child("usersInfo").child(userEmail).child("userType").getValue(String.class);
+
                 String course = getIntent().getStringExtra("course");
                 String section = getIntent().getStringExtra("section");
                 DataSnapshot studentsNames = dataSnapshot.child("coursesInfo").child(course).child(section);
@@ -92,7 +100,10 @@ public class ShowAttendanceSheet extends AppCompatActivity {
                                 }
                             }
                         }
-                        arrAttendanceAbsentCounter.add(childSnapshot.getValue(String.class) + " Attendance " + counterAttend + "  Absents " + (counterAbsent - counterAttend));
+                        if (userRealName.equals(childSnapshot.getValue(String.class)) || usertype.equals("Teacher")) {
+
+                            arrAttendanceAbsentCounter.add(childSnapshot.getValue(String.class) + " Attendance " + counterAttend + "  Absents " + (counterAbsent - counterAttend));
+                        }
                         counterAttend = 0;
                         counterAbsent = 0;
 
@@ -115,23 +126,37 @@ public class ShowAttendanceSheet extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                String userEmail = user.getEmail();
+
+                int index = userEmail.indexOf('@');
+                userEmail = userEmail.substring(0, index);
+                String userRealName = dataSnapshot.child("usersInfo").child(userEmail).child("userRealName").getValue(String.class);
+                String usertype = dataSnapshot.child("usersInfo").child(userEmail).child("userType").getValue(String.class);
+
                 String course = getIntent().getStringExtra("course");
                 String section = getIntent().getStringExtra("section");
                 String date = getIntent().getStringExtra("date");
                 DataSnapshot attendancePath = dataSnapshot.child("studentsAttendee").child(course).child(section).child(date).child("namesList");
                 for (DataSnapshot childSnapshot : attendancePath.getChildren()) {
-                    arrStudentAt.add(childSnapshot.getValue(String.class));
+                    if (userRealName.equals(childSnapshot.getValue(String.class)) || usertype.equals("Teacher")) {
+                        arrStudentAt.add(childSnapshot.getValue(String.class));
+                    }
                 }
-                setAdapter1();
 
+                setAdapter1();
 
                 DataSnapshot absentPath = dataSnapshot.child("coursesInfo").child(course).child(section);
                 for (DataSnapshot ds : absentPath.getChildren()) {
                     if (absentPath.child(ds.getKey().toString()).getValue(String.class) != null
                             && !arrStudentAt.contains(absentPath.child(ds.getKey().toString()).getValue(String.class)) && !ds.getKey().toString().equals("courseTeacher")) {
-                        arrStudentAb.add(absentPath.child(ds.getKey().toString()).getValue(String.class));
+                        if (userRealName.equals(absentPath.child(ds.getKey().toString()).getValue(String.class)) || usertype.equals("Teacher")) {
+                            arrStudentAb.add(absentPath.child(ds.getKey().toString()).getValue(String.class));
+                        }
                     }
                 }
+
                 setAdapter2();
 
             }
@@ -149,7 +174,7 @@ public class ShowAttendanceSheet extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser(); ////////////////move it to fill array and problem will fix!
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 String userEmail = user.getEmail();
 
                 int index = userEmail.indexOf('@');
@@ -161,17 +186,15 @@ public class ShowAttendanceSheet extends AppCompatActivity {
 
                     for (int i = 0; i < arrStudentAt.size(); i++) {
                         if (!userRealName.equals(arrStudentAt.get(i))) {
-                            arrStudentAt.remove(i);
+                            arrStudentAt.remove(1);
                         }
                     }
-                    setAdapter1();
 
                     for (int i = 0; i < arrStudentAb.size(); i++) {
                         if (!userRealName.equals(arrStudentAb.get(i))) {
-                            arrStudentAb.remove(i);
+                            arrStudentAb.remove(1);
                         }
                     }
-                    setAdapter2();
 
                 }
             }
