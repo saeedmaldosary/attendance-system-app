@@ -86,7 +86,7 @@ public class Training extends AppCompatActivity {
             getRuntimePermissions();
         }
 
-        path = Environment.getExternalStorageDirectory()+"/facerecogNames/";
+        path = Environment.getExternalStorageDirectory()+"/facerecogMLKit/";
         nameLabels = new Labels(path);
         boolean success=(new File(path)).mkdirs();
         if (!success)

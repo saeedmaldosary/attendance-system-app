@@ -70,6 +70,7 @@
             android:layout_height="wrap_content">
 
         </ListView>
+
     //End absent studentsLayout
 
     <View android:background="#06b4f3"
@@ -77,6 +78,7 @@
         android:layout_height="10dp"/>
 
     //Counter attend and absent studentsLayout
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -104,9 +106,10 @@
 
         </ListView>
 
-        //End Counter attend and absent studentsLayout
 
     </RelativeLayout>
+
+    //End Counter attend and absent studentsLayout
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"

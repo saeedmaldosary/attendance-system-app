@@ -98,8 +98,8 @@ public class ShowAttendanceSheet extends AppCompatActivity {
                                     counterAttend++;
 
                                 }
-                            }
-                        }
+                            }//End of childsnapshot 3
+                        }//End of childsnapshot 2
                         if (userRealName.equals(childSnapshot.getValue(String.class)) || usertype.equals("Teacher")) {
 
                             arrAttendanceAbsentCounter.add(childSnapshot.getValue(String.class) + " Attendance " + counterAttend + "  Absents " + (counterAbsent - counterAttend));
@@ -109,7 +109,7 @@ public class ShowAttendanceSheet extends AppCompatActivity {
 
 
                     }
-                }
+                } //End of childsnapshot 1
                 setAdapter3();
             }
 
