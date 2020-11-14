@@ -37,12 +37,12 @@
             android:layout_height="wrap_content" />
 
     </RelativeLayout>
-
     //End Attend studentsLayout
 
     <View android:background="#808080"
         android:layout_width = "match_parent"
         android:layout_height="4dp"/>
+
     //Absent studentsLayout
     <LinearLayout
         android:layout_width="match_parent"
@@ -70,7 +70,6 @@
             android:layout_height="wrap_content">
 
         </ListView>
-
     //End absent studentsLayout
 
     <View android:background="#06b4f3"
@@ -78,7 +77,6 @@
         android:layout_height="10dp"/>
 
     //Counter attend and absent studentsLayout
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -108,9 +106,41 @@
 
 
     </RelativeLayout>
-
     //End Counter attend and absent studentsLayout
 
+
+    //Table layout
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true" >
+
+        <HorizontalScrollView
+            android:id="@+id/hscrll1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <RelativeLayout
+                android:id="@+id/RelativeLayout1"
+                android:layout_width="fill_parent"
+                android:layout_gravity="center"
+                android:layout_height="fill_parent"
+                android:orientation="vertical" >
+
+                <TableLayout
+                    android:id="@+id/listTable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true" >
+                </TableLayout>
+            </RelativeLayout>
+        </HorizontalScrollView>
+    </ScrollView>
+    //End table layout
+
+
+    //Button edit attendance
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
@@ -136,6 +166,6 @@
             android:textColor="#fff" />
 
     </LinearLayout>
-
+//End of Button edit attendance
 
 </LinearLayout>

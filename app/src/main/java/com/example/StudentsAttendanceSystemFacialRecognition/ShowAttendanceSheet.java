@@ -1,13 +1,20 @@
 package com.example.StudentsAttendanceSystemFacialRecognition;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,9 +35,13 @@ public class ShowAttendanceSheet extends AppCompatActivity {
     ArrayList<String> arrStudentAt = new ArrayList<>();
     ArrayList<String> arrStudentAb = new ArrayList<>();
     ArrayList<String> arrAttendanceAbsentCounter = new ArrayList<>();
+    ArrayList<String> arrAttendanceAbsentCounterNames = new ArrayList<>();
+    ArrayList<Integer> arrAttendanceCounter = new ArrayList<Integer>();
+    ArrayList<Integer> arrAbsentCounter = new ArrayList<Integer>();
     int counterAttend;
     int counterAbsent;
     DatabaseReference databaseReference;
+    TableLayout t1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +51,7 @@ public class ShowAttendanceSheet extends AppCompatActivity {
         initialize();
         attendanceAbsentCounter();
         fillArrays();
+
 
 
         eAttendanceSheet.setOnClickListener(new View.OnClickListener() {
@@ -64,12 +76,66 @@ public class ShowAttendanceSheet extends AppCompatActivity {
         v1 = findViewById(R.id.listStudentAttendeeSheet1);
         v2 = findViewById(R.id.listStudentAbsentSheet1);
         v3 = findViewById(R.id.listAttednanceAbsentCounter);
+        t1 = findViewById(R.id.listTable);
         databaseReference = FirebaseDatabase.getInstance().getReference();
         eAttendanceSheet = findViewById(R.id.editAttendanceSheet);
         hideButton();
     }//End of initialize
 
+
+    public  void showTableLayout(String name,int attendance,int absent){
+        TableLayout stk = (TableLayout) findViewById(R.id.listTable);
+
+            TableRow tbrow = new TableRow(this);
+            TextView t1v = new TextView(this);
+            t1v.setText("" + name);
+        t1v.setGravity(Gravity.LEFT);
+        t1v.setTextSize(14);
+
+            tbrow.addView(t1v);
+            TextView t2v = new TextView(this);
+            t2v.setText(" " +attendance);
+        t2v.setGravity(Gravity.CENTER);
+        t2v.setTextSize(14);
+            tbrow.addView(t2v);
+            TextView t3v = new TextView(this);
+            t3v.setText("" + absent);
+        t3v.setGravity(Gravity.CENTER);
+        t3v.setTextSize(14);
+            tbrow.addView(t3v);
+
+            stk.addView(tbrow);
+
+    }//End of tablelayout
+
+
     public void attendanceAbsentCounter() {
+
+        TableLayout stk = (TableLayout) findViewById(R.id.listTable);
+        TableRow tbrow0 = new TableRow(this);
+        TextView tv0 = new TextView(this);
+        tv0.setText("Names ");
+        tv0.setTextColor(Color.BLACK);
+        tv0.setTextSize(16);
+        tv0.setGravity(Gravity.LEFT);
+//        tv0.setBackgroundResource(R.drawable.border);
+        tbrow0.addView(tv0);
+        TextView tv1 = new TextView(this);
+        tv1.setText(" Attendance ");
+        tv1.setTextColor(Color.BLACK);
+        tv1.setTextSize(16);
+        tv1.setGravity(Gravity.CENTER);
+//        tv1.setBackgroundResource(R.drawable.border);
+        tbrow0.addView(tv1);
+        TextView tv2 = new TextView(this);
+        tv2.setText(" Absents ");
+        tv2.setTextColor(Color.BLACK);
+        tv2.setGravity(Gravity.RIGHT);
+        tv2.setTextSize(16);
+//        tv2.setBackgroundResource(R.drawable.border);
+        tbrow0.addView(tv2);
+        stk.addView(tbrow0);
+
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -103,6 +169,10 @@ public class ShowAttendanceSheet extends AppCompatActivity {
                         if (userRealName.equals(childSnapshot.getValue(String.class)) || usertype.equals("Teacher")) {
 
                             arrAttendanceAbsentCounter.add(childSnapshot.getValue(String.class) + " Attendance " + counterAttend + "  Absents " + (counterAbsent - counterAttend));
+                            showTableLayout(childSnapshot.getValue(String.class),counterAttend,(counterAbsent - counterAttend));
+                            arrAttendanceAbsentCounterNames.add(childSnapshot.getValue(String.class));
+                            arrAttendanceCounter.add(counterAttend);
+                            arrAbsentCounter.add(counterAbsent - counterAttend);
                         }
                         counterAttend = 0;
                         counterAbsent = 0;
@@ -110,7 +180,7 @@ public class ShowAttendanceSheet extends AppCompatActivity {
 
                     }
                 } //End of childsnapshot 1
-                setAdapter3();
+//                setAdapter3();
             }
 
             @Override
@@ -170,41 +240,8 @@ public class ShowAttendanceSheet extends AppCompatActivity {
 
     }//End of fillArrays
 
-    public void removeNames() {
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                String userEmail = user.getEmail();
 
-                int index = userEmail.indexOf('@');
-                userEmail = userEmail.substring(0, index);
 
-                String usertype = dataSnapshot.child("usersInfo").child(userEmail).child("userType").getValue(String.class);
-                if (usertype.equals("Student")) {
-                    String userRealName = dataSnapshot.child("usersInfo").child(userEmail).child("userRealName").getValue(String.class);
-
-                    for (int i = 0; i < arrStudentAt.size(); i++) {
-                        if (!userRealName.equals(arrStudentAt.get(i))) {
-                            arrStudentAt.remove(1);
-                        }
-                    }
-
-                    for (int i = 0; i < arrStudentAb.size(); i++) {
-                        if (!userRealName.equals(arrStudentAb.get(i))) {
-                            arrStudentAb.remove(1);
-                        }
-                    }
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
 
     public void setAdapter1() {
         ArrayAdapter<String> arrayAdapterAttendee1 = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, arrStudentAt);
