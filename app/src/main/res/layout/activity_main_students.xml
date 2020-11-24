@@ -23,7 +23,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/attendanceSheetButtonStudents"
             android:foreground="?android:attr/selectableItemBackground"
             android:clickable="true"
@@ -51,7 +51,7 @@
 
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
 
 

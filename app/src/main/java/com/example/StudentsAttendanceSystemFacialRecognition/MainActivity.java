@@ -1,10 +1,10 @@
 package com.example.StudentsAttendanceSystemFacialRecognition;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
+import androidx.cardview.widget.CardView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -86,21 +86,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.item1Main:
-                Toast.makeText(this, "item 1 selected", Toast.LENGTH_SHORT).show();
-                return true;
+
             case R.id.item2Main:
                 FirebaseAuth.getInstance().signOut();
                 Intent intLogin = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intLogin);
                 finish();
                 return true;
-            case R.id.subItem1Main:
-                Toast.makeText(this, "sub item 1 selected", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.subItem2Main:
-                Toast.makeText(this, "sub item 2 selected", Toast.LENGTH_SHORT).show();
-                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }

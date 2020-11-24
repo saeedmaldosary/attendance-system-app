@@ -87,6 +87,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
+            android:id="@+id/AllStudentsAbsentsAndAttendance"
             android:gravity="center_vertical|center_horizontal"
             android:text="Students attendances and absents" />
     </LinearLayout>
@@ -114,19 +115,23 @@
         android:id="@+id/scrollView1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true" >
+        android:layout_alignParentLeft="true"
+       >
 
         <HorizontalScrollView
             android:id="@+id/hscrll1"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            >
 
             <RelativeLayout
                 android:id="@+id/RelativeLayout1"
                 android:layout_width="fill_parent"
                 android:layout_gravity="center"
                 android:layout_height="fill_parent"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                android:layout_marginLeft="10dp"
+                >
 
                 <TableLayout
                     android:id="@+id/listTable"

@@ -1,7 +1,7 @@
 package com.example.StudentsAttendanceSystemFacialRecognition;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -57,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
                     DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("usersInfo").child(userEmail).child("userType");
                     ref.addValueEventListener(new ValueEventListener() {
                         @Override
-                        public void onDataChange(@android.support.annotation.NonNull DataSnapshot dataSnapshot) {
+                        public void onDataChange(@androidx.annotation.NonNull DataSnapshot dataSnapshot) {
                             if (dataSnapshot.getValue().equals("Teacher")) {
                                 Toast.makeText(LoginActivity.this, "You are logged in", Toast.LENGTH_SHORT).show();
                                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
@@ -70,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onCancelled(@android.support.annotation.NonNull DatabaseError databaseError) {
+                        public void onCancelled(@androidx.annotation.NonNull DatabaseError databaseError) {
 
                         }
                     });
@@ -102,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
                     DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("usersInfo").child(emailL.getText().toString().toLowerCase());
                     ref.addValueEventListener(new ValueEventListener() {
                         @Override
-                        public void onDataChange(@android.support.annotation.NonNull DataSnapshot dataSnapshot) {
+                        public void onDataChange(@androidx.annotation.NonNull DataSnapshot dataSnapshot) {
                             if (dataSnapshot.hasChild("userType")) {
                                 userT = dataSnapshot.child("userType").getValue().toString();
 
@@ -152,7 +151,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onCancelled(@android.support.annotation.NonNull DatabaseError databaseError) {
+                        public void onCancelled(@androidx.annotation.NonNull DatabaseError databaseError) {
 
                         }
                     });

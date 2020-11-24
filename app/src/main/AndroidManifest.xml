@@ -26,49 +26,42 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.StudentsAttendanceSystemFacialRecognition.editAttendanceSheet"
-            android:label=""></activity>
+        <activity android:name=".AllStudentsAbsentsAndAttenance"></activity>
         <activity
-            android:name="com.example.StudentsAttendanceSystemFacialRecognition.ShowAttendanceSheet"
-            android:label="" />
+            android:name=".editAttendanceSheet"></activity>
         <activity
-            android:name="com.example.StudentsAttendanceSystemFacialRecognition.AttendanceSheetSelect"
-            android:label="" />
+            android:name=".ShowAttendanceSheet"></activity>
         <activity
-            android:name="com.example.StudentsAttendanceSystemFacialRecognition.ConfirmAttendeeStudentList"
-            android:label="" />
+            android:name=".AttendanceSheetSelect"></activity>
         <activity
-            android:name="com.example.StudentsAttendanceSystemFacialRecognition.attendeeStudentsList"
-            android:label="" />
-        <activity android:name="com.example.StudentsAttendanceSystemFacialRecognition.confirmAttendee" />
+            android:name=".ConfirmAttendeeStudentList"></activity>
         <activity
-            android:name="com.example.StudentsAttendanceSystemFacialRecognition.ChooseCourseDetectdNames"
-            android:label="" />
+            android:name=".attendeeStudentsList"></activity>
+        <activity android:name=".confirmAttendee" />
         <activity
-            android:name="com.example.StudentsAttendanceSystemFacialRecognition.SelectCourseTrain"
-            android:label="" />
-        <activity android:name="com.example.StudentsAttendanceSystemFacialRecognition.MainActivityStudents"
-            android:label=""/>
+            android:name=".ChooseCourseDetectdNames"></activity>
         <activity
-            android:name="com.example.StudentsAttendanceSystemFacialRecognition.LoginActivity"
-            android:label="@string/space" />
+            android:name=".SelectCourseTrain"></activity>
         <activity
-            android:name="com.example.StudentsAttendanceSystemFacialRecognition.Recognise"
+            android:name=".MainActivityStudents"></activity>
+        <activity
+            android:name=".LoginActivity"></activity>
+        <activity
+            android:name=".Recognise"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.example.StudentsAttendanceSystemFacialRecognition.MainActivity"
-            android:label="@string/space" />
+            android:name=".MainActivity"></activity>
         <activity
-            android:name="com.example.StudentsAttendanceSystemFacialRecognition.DetectedNames"
+            android:name=".DetectedNames"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.example.StudentsAttendanceSystemFacialRecognition.Training"
+            android:name=".Training"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.example.StudentsAttendanceSystemFacialRecognition.NameActivity"
+            android:name=".NameActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.example.StudentsAttendanceSystemFacialRecognition.Splash_Screen"
+            android:name=".Splash_Screen"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
