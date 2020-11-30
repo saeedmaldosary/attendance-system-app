@@ -1,8 +1,10 @@
 package com.example.StudentsAttendanceSystemFacialRecognition;
 
 import android.content.Intent;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -222,7 +224,9 @@ public class AttendanceSheetSelect extends AppCompatActivity {
                         for (DataSnapshot ds : coursesInfo.getChildren()) {
                             if (coursesInfo.child(ds.getKey().toString()).hasChild("courseTeacher")) {
                                 if (coursesInfo.child(ds.getKey().toString()).child("courseTeacher").getValue(String.class).equals(teacherName)) {
-                                    courseArrayList.add(coursesInfo.getKey().toString());
+                                    if (!courseArrayList.contains(coursesInfo.getKey().toString())) {
+                                        courseArrayList.add(coursesInfo.getKey().toString());
+                                    }
                                 }
                             }
                         }

@@ -163,30 +163,6 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu2, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.item1Login:
-                Toast.makeText(this, "item 1 selected", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.subItem1Login:
-                Toast.makeText(this, "sub item 1 selected", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.subItem2Login:
-                Toast.makeText(this, "sub item 2 selected", Toast.LENGTH_SHORT).show();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-
-    }
 
     @Override
     protected void onStart() {

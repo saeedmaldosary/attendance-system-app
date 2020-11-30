@@ -49,6 +49,7 @@ public class ShowAttendanceSheet extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_attendance_sheet);
 
+
         initialize();
         attendanceAbsentCounter();
         fillArrays();
@@ -70,17 +71,7 @@ public class ShowAttendanceSheet extends AppCompatActivity {
             }
         });
 
-        t99.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ShowAttendanceSheet.this, AllStudentsAbsentsAndAttenance.class);
-                String course = getIntent().getStringExtra("course");
-                String section = getIntent().getStringExtra("section");
-                intent.putExtra("course", course);
-                intent.putExtra("section", section);
-                startActivity(intent);
-            }
-        });
+
 
     }//End of onCreate
 
@@ -92,6 +83,17 @@ public class ShowAttendanceSheet extends AppCompatActivity {
         t99 = findViewById(R.id.AllStudentsAbsentsAndAttendance);
         databaseReference = FirebaseDatabase.getInstance().getReference();
         eAttendanceSheet = findViewById(R.id.editAttendanceSheet);
+        t99.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ShowAttendanceSheet.this, AllStudentsAbsentsAndAttenance.class);
+                String course = getIntent().getStringExtra("course");
+                String section = getIntent().getStringExtra("section");
+                intent.putExtra("course", course);
+                intent.putExtra("section", section);
+                startActivity(intent);
+            }
+        });
         hideButton();
     }//End of initialize
 
@@ -125,12 +127,7 @@ public class ShowAttendanceSheet extends AppCompatActivity {
         t3v.setTextSize(14);
         tbrow.addView(t3v);
 
-        TextView t4v = new TextView(this);
-        t4v.setText("saldosary@sm.imamu.edu.sa");
-        t4v.setGravity(Gravity.CENTER);
-        t4v.setTextSize(10);
 
-        tbrow.addView(t4v);
 
         stk.addView(tbrow);
 
@@ -141,7 +138,8 @@ public class ShowAttendanceSheet extends AppCompatActivity {
 
         TableLayout stk = (TableLayout) findViewById(R.id.listTable);
         TableRow tbrow0 = new TableRow(this);
-        TextView tv0 = new TextView(this);
+        final TextView tv0 = new TextView(this);
+
         tv0.setText("Names ");
         tv0.setTextColor(Color.BLACK);
         tv0.setTextSize(16);
@@ -161,12 +159,7 @@ public class ShowAttendanceSheet extends AppCompatActivity {
         tv2.setTextSize(16);
         tbrow0.addView(tv2);
 
-        TextView tv3 = new TextView(this);
-        tv3.setText(" Email ");
-        tv3.setTextColor(Color.BLACK);
-        tv3.setGravity(Gravity.LEFT);
-        tv3.setTextSize(16);
-        tbrow0.addView(tv3);
+
 
         stk.addView(tbrow0);
 
@@ -182,6 +175,19 @@ public class ShowAttendanceSheet extends AppCompatActivity {
                 String userRealName = dataSnapshot.child("usersInfo").child(userEmail).child("userRealName").getValue(String.class);
                 String usertype = dataSnapshot.child("usersInfo").child(userEmail).child("userType").getValue(String.class);
 
+                if(usertype.equals("Teacher")) {
+                    tv0.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(ShowAttendanceSheet.this, StudentsEmails.class);
+                            String course = getIntent().getStringExtra("course");
+                            String section = getIntent().getStringExtra("section");
+                            intent.putExtra("course", course);
+                            intent.putExtra("section", section);
+                            startActivity(intent);
+                        }
+                    });
+                }
                 String course = getIntent().getStringExtra("course");
                 String section = getIntent().getStringExtra("section");
                 DataSnapshot studentsNames = dataSnapshot.child("coursesInfo").child(course).child(section);
@@ -203,7 +209,9 @@ public class ShowAttendanceSheet extends AppCompatActivity {
                         if (userRealName.equals(childSnapshot.getValue(String.class)) || usertype.equals("Teacher")) {
 
                             arrAttendanceAbsentCounter.add(childSnapshot.getValue(String.class) + " Attendance " + counterAttend + "  Absents " + (counterAbsent - counterAttend));
+                            //Perform the method
                             showTableLayout(childSnapshot.getValue(String.class), counterAttend, (counterAbsent - counterAttend));
+                            /////
                             arrAttendanceAbsentCounterNames.add(childSnapshot.getValue(String.class));
                             arrAttendanceCounter.add(counterAttend);
                             arrAbsentCounter.add(counterAbsent - counterAttend);
@@ -224,6 +232,27 @@ public class ShowAttendanceSheet extends AppCompatActivity {
         });
 
     }//End of abasentCounter function
+
+    public void getEmail(final String name) {
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                DataSnapshot studentsUserNames = dataSnapshot.child("usersInfo");
+                for (DataSnapshot childSnapshot : studentsUserNames.getChildren()) {
+                    DataSnapshot studentsRealNames = dataSnapshot.child("usersInfo").child(childSnapshot.getValue().toString());
+                    for (DataSnapshot childSnapshot2 : studentsRealNames.getChildren()) {
+                        if(childSnapshot2.getValue().toString().equals(name)) {
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
 
     public void fillArrays() {
 
@@ -303,6 +332,7 @@ public class ShowAttendanceSheet extends AppCompatActivity {
                 String usertype = dataSnapshot.child("usersInfo").child(userEmail).child("userType").getValue(String.class);
                 if (usertype.equals("Student")) {
                     eAttendanceSheet.setVisibility(View.INVISIBLE);
+                    t99.setOnClickListener(null);
                 }
             }
 

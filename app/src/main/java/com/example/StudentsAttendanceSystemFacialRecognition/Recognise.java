@@ -64,27 +64,7 @@ public class Recognise extends AppCompatActivity {
 //        txtNames22 = findViewById(R.id.test123);
         btnSubmit = findViewById(R.id.btnSubmit);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        if (Camera.getNumberOfCameras() == 1) {
-            fab.hide();
-        } else {
-            fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (cameraSource != null) {
-                        if (facingBack) {
-                            cameraSource.setFacing(CameraSource.CAMERA_FACING_FRONT);
-                            facingBack = false;
-                        } else {
-                            cameraSource.setFacing(CameraSource.CAMERA_FACING_BACK);
-                            facingBack = true;
-                        }
-                    }
-                    preview.stop();
-                    startCameraSource();
-                }
-            });
-        }
+
 
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {

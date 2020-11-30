@@ -218,7 +218,7 @@ public class SelectCourseTrain extends AppCompatActivity {
 
                     for (DataSnapshot ds : coursesInfo.getChildren()) {
                         if (coursesInfo.child(ds.getKey().toString()).hasChild("courseTeacher")) {
-                            if (coursesInfo.child(ds.getKey().toString()).child("courseTeacher").getValue(String.class).equals(teacherName)) {
+                            if (coursesInfo.child(ds.getKey().toString()).child("courseTeacher").getValue(String.class).equals(teacherName) && !courseArrayList.contains(coursesInfo.getKey().toString())) {
                                 courseArrayList.add(coursesInfo.getKey().toString());
                             }
                         }

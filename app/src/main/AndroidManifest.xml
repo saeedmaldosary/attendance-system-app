@@ -26,31 +26,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AllStudentsAbsentsAndAttenance"></activity>
-        <activity
-            android:name=".editAttendanceSheet"></activity>
-        <activity
-            android:name=".ShowAttendanceSheet"></activity>
-        <activity
-            android:name=".AttendanceSheetSelect"></activity>
-        <activity
-            android:name=".ConfirmAttendeeStudentList"></activity>
-        <activity
-            android:name=".attendeeStudentsList"></activity>
+        <activity android:name=".StudentsEmails"></activity>
+        <activity android:name=".AllStudentsAbsentsAndAttenance" />
+        <activity android:name=".editAttendanceSheet" />
+        <activity android:name=".ShowAttendanceSheet" />
+        <activity android:name=".AttendanceSheetSelect" />
+        <activity android:name=".ConfirmAttendeeStudentList" />
+        <activity android:name=".attendeeStudentsList" />
         <activity android:name=".confirmAttendee" />
-        <activity
-            android:name=".ChooseCourseDetectdNames"></activity>
-        <activity
-            android:name=".SelectCourseTrain"></activity>
-        <activity
-            android:name=".MainActivityStudents"></activity>
-        <activity
-            android:name=".LoginActivity"></activity>
+        <activity android:name=".ChooseCourseDetectdNames" />
+        <activity android:name=".SelectCourseTrain" />
+        <activity android:name=".MainActivityStudents" />
+        <activity android:name=".LoginActivity" />
         <activity
             android:name=".Recognise"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
         <activity
             android:name=".DetectedNames"
             android:theme="@style/AppTheme.NoActionBar" />

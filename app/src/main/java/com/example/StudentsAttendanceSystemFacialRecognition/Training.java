@@ -56,28 +56,7 @@ public class Training extends AppCompatActivity {
 
 
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        if (Camera.getNumberOfCameras() == 1) {
-            fab.hide();
-        }
-        else{
-            fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (cameraSource != null) {
-                        if (facingBack) {
-                            cameraSource.setFacing(CameraSource.CAMERA_FACING_FRONT);
-                            facingBack = false;
-                        } else {
-                            cameraSource.setFacing(CameraSource.CAMERA_FACING_BACK);
-                            facingBack = true;
-                        }
-                    }
-                    preview.stop();
-                    startCameraSource();
-                }
-            });
-        }
+       
 
         if (allPermissionsGranted()) {
             createCameraSource();
